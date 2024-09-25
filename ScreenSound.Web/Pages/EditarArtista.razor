@@ -113,8 +113,6 @@ else
 
     private async Task UpdateFile(IBrowserFile file)
     {
-        await artistasAPI.DeleteFotoPerfil(fotoPerfil);
-
         long maxFileSize = 1024 * 1024 * 15;
         var format = "image/jpeg";
         var resizedImage = await file.RequestImageFileAsync(format, 200, 200);
