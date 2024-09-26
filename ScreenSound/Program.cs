@@ -8,10 +8,9 @@ var artistaDAL = new DAL<Artista>(context);
 
 //using (context)
 //{
-//    var sql = "CREATE TABLE GeneroMusica (\n    GenerosId INT NOT NULL,\n    MusicasId INT NOT NULL,\n    PRIMARY KEY (GenerosId, MusicasId),\n    FOREIGN KEY (GenerosId) REFERENCES Generos(Id) ON DELETE CASCADE,\n    FOREIGN KEY (MusicasId) REFERENCES Musicas(Id) ON DELETE CASCADE\n);\n\nCREATE INDEX IX_GeneroMusica_MusicasId ON GeneroMusica (MusicasId);";
+//    var sql = "";
 //    context.Database.ExecuteSqlRaw(sql);
 //}
-
 
 //Dictionary<int, Menu> opcoes = new();
 //opcoes.Add(1, new MenuRegistrarArtista());

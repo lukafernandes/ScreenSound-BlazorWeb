@@ -1,6 +1,7 @@
 ﻿@page "/EditarArtista/{NomeArtista}"
 @inject ArtistasAPI artistasAPI
 @inject NavigationManager navigationManager
+
 @if (Artista is not null)
 {
     <MudPaper Class="px-8 pt-2 pb-4 mx-12 my-8" Justify="Justify.Center">
@@ -125,4 +126,5 @@ else
         fileImage = $"data:{format};base64,{imageUpload}";
         novaFotoPerfil = imageUpload;
     }
+    
 }

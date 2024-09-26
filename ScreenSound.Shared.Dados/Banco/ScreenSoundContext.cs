@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
@@ -7,9 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScreenSound.Shared.Dados.Modelos;
 
 namespace ScreenSound.Banco;
-public class ScreenSoundContext: DbContext
+public class ScreenSoundContext : IdentityDbContext<PessoaComAcesso, PerfilDeAcesso, int>
 {
     public DbSet<Artista> Artistas { get; set; }
     public DbSet<Musica> Musicas { get; set; }
@@ -17,6 +19,10 @@ public class ScreenSoundContext: DbContext
 
     private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ScreenSoundV0;Integrated Security=True;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
+    public ScreenSoundContext()
+    {
+
+    }
 
     public ScreenSoundContext(DbContextOptions options) : base(options)
     {
@@ -39,6 +45,7 @@ public class ScreenSoundContext: DbContext
         modelBuilder.Entity<Musica>()
             .HasMany(c => c.Generos)
             .WithMany(c => c.Musicas);
+        base.OnModelCreating(modelBuilder);
     }
 
 }

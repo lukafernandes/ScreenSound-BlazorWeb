@@ -36,9 +36,4 @@ public class ArtistasAPI
     {
         await _httpClient.PutAsJsonAsync($"artistas", artista);
     }
-
-    public async Task DeleteFotoPerfil(string fotoAntiga)
-    {
-        await _httpClient.DeleteAsync(fotoAntiga);
-    }
 }
