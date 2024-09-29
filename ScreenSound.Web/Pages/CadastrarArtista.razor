@@ -62,7 +62,7 @@
     {
         long maxFileSize = 1024 * 1024 * 15;
         var format = "image/jpeg";
-        var resizedImage = await file.RequestImageFileAsync(format, 200, 200);
+        var resizedImage = await file.RequestImageFileAsync(format, 1000, 1000);
 
         using var fileStream = resizedImage.OpenReadStream();
         using var memoryStream = new MemoryStream();

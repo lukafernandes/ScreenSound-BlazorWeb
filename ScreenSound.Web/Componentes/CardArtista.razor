@@ -8,11 +8,12 @@
         <MudCardContent>
             <MudText Typo="Typo.body2">@Artista!.Bio</MudText>
         </MudCardContent>
+        <MudRating SelectedValue="@Convert.ToInt32(Artista!.Classificacao)" />  
         <MudCardActions>
             <MudButton Color="Color.Warning"
                        Variant="Variant.Outlined"
                        Href=@($"/EditarArtista/{Artista!.Nome}")>Editar</MudButton>
-        </MudCardActions>
+        </MudCardActions>    
 </MudCard>
 
 @code {

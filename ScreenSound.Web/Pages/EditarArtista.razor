@@ -41,26 +41,34 @@
             </ButtonTemplate>
         </MudFileUpload>
 
-        <div class="d-flex align-center justify-space-between mt-4">
-            <MudButton Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Class="ml-auto"
-                       @onclick="Editar">
-                Salvar
-            </MudButton>
-            <MudButton Variant="Variant.Filled"
-                       @onclick="Deletar"
-                       Color="Color.Secondary"
-                       Class="ml-3">
-                Deletar
-            </MudButton>
-            <MudButton Variant="Variant.Filled"
-                       Color="Color.Info"
-                       Class="ml-3"
-                       @onclick="VoltarParaListagem">
-                Voltar
-            </MudButton>
-        </div>
+            <div class="d-flex align-center justify-space-between mt-4">
+
+                <MudRating @bind-SelectedValue="Classificacao"
+                           @onclick="AvaliarArtista" />
+
+                <div>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Disabled="@(!success)"
+                               Class="ml-auto"
+                               @onclick="Editar">
+                        Salvar
+                    </MudButton>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Warning"
+                               Class="ml-3"
+                               @onclick="Deletar">
+                        Excluir
+                    </MudButton>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Info"
+                               Class="ml-3"
+                               @onclick="VoltarParaListagem">
+                        Voltar
+                    </MudButton>
+                </div>
+
+            </div>
 
     </MudForm>
 </MudPaper>
@@ -71,11 +79,15 @@ else
 }
 
 @code {
+    bool success;
+    string[] errors = { };
+    MudForm? form;
     private string? nome;
     private string? biografia;
     private string? fileImage;
     private string? novaFotoPerfil;
     private string? fotoPerfil;
+    public int Classificacao { get; set; }
 
     [Parameter]
     public string? NomeArtista { get; set; }
@@ -116,7 +128,7 @@ else
     {
         long maxFileSize = 1024 * 1024 * 15;
         var format = "image/jpeg";
-        var resizedImage = await file.RequestImageFileAsync(format, 200, 200);
+        var resizedImage = await file.RequestImageFileAsync(format, 1000, 1000);
 
         using var fileStream = resizedImage.OpenReadStream();
         using var memoryStream = new MemoryStream();
@@ -126,5 +138,10 @@ else
         fileImage = $"data:{format};base64,{imageUpload}";
         novaFotoPerfil = imageUpload;
     }
-    
+
+    private async Task AvaliarArtista()
+    {
+        await artistasAPI.AvaliaArtistaAsync(Artista!.Id, Classificacao);
+    }
+
 }

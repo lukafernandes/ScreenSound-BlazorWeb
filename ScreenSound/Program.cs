@@ -8,7 +8,7 @@ var artistaDAL = new DAL<Artista>(context);
 
 //using (context)
 //{
-//    var sql = "";
+//    var sql = "CREATE TABLE AvaliacaoArtistas (\r\n    ArtistaId INT NOT NULL,\r\n    PessoaId INT NOT NULL,\r\n    Nota INT NOT NULL,\r\n    PRIMARY KEY (ArtistaId, PessoaId),\r\n    FOREIGN KEY (ArtistaId) REFERENCES Artistas(Id) ON DELETE CASCADE\r\n);";
 //    context.Database.ExecuteSqlRaw(sql);
 //}
 
